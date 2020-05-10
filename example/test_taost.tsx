@@ -38,11 +38,7 @@ export default defineComponent({
       h(WingBlank, () =>
         [1, 2, 3, 4, 5, 6].map((n) => [
           h(WhiteSpace),
-          h(
-            Button,
-            { onClick: () => click(n), style: 'width:100px' },
-            () => 'button'
-          ),
+          h(Button, { onClick: () => click(n) }, () => 'button'),
         ])
       )
   },

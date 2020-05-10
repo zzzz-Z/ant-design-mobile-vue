@@ -12,19 +12,12 @@ import {
   VcCollapseProps,
   CollapseInjectionKey,
 } from './interface'
-import { initDefaultProps } from '../_util/initDefaultProps'
 import PanelContent from './PanelContent'
 import { withVshow } from '../utils/directives'
 
 export default defineComponent({
   name: 'Panel',
-  props: initDefaultProps(panelProps(), {
-    showArrow: true,
-    isActive: false,
-    destroyInactivePanel: false,
-    headerClass: '',
-    forceRender: false,
-  }),
+  props: panelProps,
   setup(props, { slots, emit }) {
     const uid = getCurrentInstance()!.uid
     const collapse = inject<CollapseInstance>(CollapseInjectionKey)!

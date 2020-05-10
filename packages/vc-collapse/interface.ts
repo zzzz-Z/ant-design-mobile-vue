@@ -1,5 +1,5 @@
 import { VNode, ComponentInternalInstance } from 'vue'
-import PropTypes from 'packages/_util/vue-types'
+import { defineProps } from '../_util/vue-types/defineProps'
 
 export const CollapseInjectionKey = Symbol()
 export interface CollapseInstance extends ComponentInternalInstance {
@@ -22,46 +22,30 @@ export interface VcCollapseProps {
   onChange?(val: string | string[]): void
 }
 
-export const collapseProps = () => ({
-  prefixCls: PropTypes.string,
-  activeKey: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    ),
-  ]),
-  defaultActiveKey: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    ),
-  ]),
-  accordion: PropTypes.bool,
-  destroyInactivePanel: PropTypes.bool,
-  bordered: PropTypes.bool,
-  expandIcon: PropTypes.func,
-  openAnimation: PropTypes.object,
-  expandIconPosition: PropTypes.oneOf(['left', 'right']),
+export const collapseProps = defineProps({
+  prefixCls: 'rc-collapse',
+  accordion: false,
+  destroyInactivePanel: false,
+  activeKey: [String, Number, Array],
+  defaultActiveKey: [String, Number, Array],
+  bordered: Boolean,
+  expandIcon: Function,
+  openAnimation: Object,
+  expandIconPosition: String,
 })
 
-export const panelProps = () => ({
-  openAnimation: PropTypes.object,
-  prefixCls: PropTypes.string,
-  header: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.node,
-  ]),
-  headerClass: PropTypes.string,
-  showArrow: PropTypes.bool,
-  isActive: PropTypes.bool,
-  destroyInactivePanel: PropTypes.bool,
-  disabled: PropTypes.bool,
-  accordion: PropTypes.bool,
-  forceRender: PropTypes.bool,
-  expandIcon: PropTypes.func,
-  extra: PropTypes.any,
-  panelKey: PropTypes.any,
+export const panelProps = defineProps({
+  showArrow: true,
+  isActive: false,
+  destroyInactivePanel: false,
+  headerClass: '',
+  forceRender: false,
+  openAnimation: Object,
+  prefixCls: String,
+  header: null,
+  disabled: Boolean,
+  accordion: Boolean,
+  expandIcon: Function,
+  extra: null,
+  panelKey: null,
 })

@@ -1,10 +1,11 @@
 const types = [String, Number, Boolean, Array, Object, Date, Function, Symbol]
-export function defineProps(defaultProps: any) {
+
+export function defineProps(defaultProps: any, othersProps: any = {}) {
   const props: any = {}
   Object.keys(defaultProps).forEach((key) => {
     const v = defaultProps[key]
     if (types.includes(v)) {
-      props[key] = v
+      props[key] = { type: v }
     } else {
       switch (typeof v) {
         case 'string':
@@ -23,8 +24,7 @@ export function defineProps(defaultProps: any) {
           }
           break
         case 'function':
-          /** 如果有返回值 则返回值为类型 */
-          props[key] = v?.() ? v() : { default: v, type: Function }
+          props[key] = { default: v, type: Function }
           break
         case 'symbol':
           props[key] = { default: v, type: Symbol }
@@ -39,6 +39,10 @@ export function defineProps(defaultProps: any) {
           break
       }
     }
+  })
+
+  Object.keys(othersProps).forEach((key) => {
+    props[key] = { ...props[key], ...othersProps[key] }
   })
   return props
 }

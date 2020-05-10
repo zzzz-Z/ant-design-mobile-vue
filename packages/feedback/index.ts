@@ -36,7 +36,6 @@ export const TouchFeedback = defineComponent<ITouchProps>({
         disabled,
         activeClassName,
         activeStyle,
-        style,
         prefixCls,
         ...restProps
       } = attrs
@@ -44,7 +43,6 @@ export const TouchFeedback = defineComponent<ITouchProps>({
       const evts = !disabled ? events : {}
       const activeCls =
         activeClassName || (activeStyle ? `${prefixCls}-active` : '')
-       
       return cloneVNode(
         child(),
         mergeProps(restProps, {

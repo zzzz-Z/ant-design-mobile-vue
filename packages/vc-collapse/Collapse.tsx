@@ -7,7 +7,7 @@ import {
   provide,
 } from 'vue'
 import animation from './openAnimationFactory'
-import { initDefaultProps } from 'packages/_util/initDefaultProps'
+
 import {
   VcCollapseProps,
   collapseProps,
@@ -18,11 +18,7 @@ import useStateWithCtx from 'packages/utils/useStateWithCtx'
 export default defineComponent<VcCollapseProps>({
   name: 'Collapse',
   emits: ['change'],
-  props: initDefaultProps(collapseProps(), {
-    prefixCls: 'rc-collapse',
-    accordion: false,
-    destroyInactivePanel: false,
-  }),
+  props: collapseProps,
   setup(props, { emit, slots }) {
     const instance = getCurrentInstance()
     const defaultActiveKey = props.accordion ? '' : []
