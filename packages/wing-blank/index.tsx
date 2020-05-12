@@ -1,11 +1,11 @@
 import './style'
 import { WingBlankPropsType } from './PropsType'
-import { h, FunctionalComponent } from 'vue'
+import { h, FunctionalComponent, CSSProperties } from 'vue'
 
 export interface WingBlankProps extends WingBlankPropsType {
   prefixCls?: string
   className?: string
-  style?: React.CSSProperties
+  style?: CSSProperties | string
 }
 
 const WingBlank: FunctionalComponent<WingBlankProps> = (_props, { slots }) => {

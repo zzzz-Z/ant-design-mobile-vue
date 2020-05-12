@@ -31,19 +31,15 @@ function includes(arr: Array<any>, item: any) {
   return false
 }
 
-export type HTMLTableDataProps = Omit<
-  React.HTMLProps<HTMLTableDataCellElement>,
-  'onClick'
->
+export type HTMLTableDataProps = {
+  [key: string]: any
+}
 
 export interface KeyboardItemProps extends HTMLTableDataProps {
   prefixCls?: string
   tdRef?: Ref<HTMLTableDataCellElement | null>
   iconOnly?: boolean
-  onClick: (
-    event: React.TouchEvent<HTMLTableDataCellElement>,
-    value: string
-  ) => void
+  onClick: (event: any, value: string) => void
 }
 export const KeyboardItem = defineComponent<KeyboardItemProps>({
   props: defineProps({
@@ -133,7 +129,7 @@ export const CustomKeyboard = defineComponent({
       if (value === 'confirm' && confirmDisabled) {
         return null
       } else {
-        ;(linkedInput?.ctx as any)?.onKeyboardClick?.(value)
+        ;(linkedInput as any)?.ctx?.onKeyboardClick?.(value)
       }
     }
 
@@ -190,7 +186,7 @@ export const CustomKeyboard = defineComponent({
       return h('table', h('tbody', [tr1, tr2, tr3, tr4]))
     }
 
-    const isHide = () => (linkedInput?.ctx as any).state.focus
+    const isHide = () => ((linkedInput as any)?.ctx).state.focus
 
     return () => {
       const { prefixCls, header } = props

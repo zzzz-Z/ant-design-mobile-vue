@@ -1,12 +1,12 @@
 import closest from '../_util/closest'
 import Modal from './Modal'
 import { Action } from './PropsType'
-import { createApp, h, VNode, reactive } from 'vue'
+import { createApp, h, VNode, reactive, CSSProperties } from 'vue'
 
 export default function useAlert(
   title: string | VNode | (() => VNode),
   message: string | VNode | (() => VNode),
-  actions: Action<React.CSSProperties>[] = [{ text: '确定' }],
+  actions: Action<CSSProperties>[] = [{ text: '确定' }],
   platform = 'ios'
 ) {
   const state = reactive({ visible: true })
@@ -30,7 +30,7 @@ export default function useAlert(
     return button
   })
 
-  function onWrapTouchStart(e: React.TouchEvent<HTMLDivElement>) {
+  function onWrapTouchStart(e: TouchEvent) {
     if (!/iPhone|iPod|iPad/i.test(navigator.userAgent)) {
       return
     }
@@ -60,8 +60,8 @@ export default function useAlert(
         h(
           'div',
           { class: 'am-modal-alert-content' },
-          typeof message == 'function' ? message() : message 
-        ) 
+          typeof message == 'function' ? message() : message
+        )
     )
   )
   App.mount(div)

@@ -36,9 +36,7 @@ export interface InputItemPropsType {
   maxLength?: number
   extra?: VNode
   error?: boolean
-  // can not find out where it used
-  // onErrorPress?: Function;
-  // size?: 'large' | 'small';
+  size?: 'large' | 'small';
   labelNumber?: number
   labelPosition?: 'left' | 'top'
   textAlign?: 'left' | 'center'

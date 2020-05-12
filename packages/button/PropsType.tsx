@@ -1,3 +1,5 @@
+import { VNode, CSSProperties, Events } from 'vue'
+
 export interface ButtonProps {
   type?: 'primary' | 'warning' | 'ghost'
   size?: 'large' | 'small'
@@ -7,9 +9,9 @@ export interface ButtonProps {
   className?: string
   role?: string
   inline?: boolean
-  icon?: React.ReactNode
+  icon?: VNode | string
   activeClassName?: string
-  activeStyle?: boolean | React.CSSProperties
-  style?: React.CSSProperties | string
-  onClick?: React.MouseEventHandler<HTMLAnchorElement>
+  activeStyle?: boolean | CSSProperties
+  style?: CSSProperties | string
+  onClick?: Events['onClick']
 }

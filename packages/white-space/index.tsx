@@ -18,8 +18,10 @@ const WhiteSpace: FunctionalComponent<WhiteSpacePropsType> = (
     {
       class: [prefixCls, `${prefixCls}-${size}`],
     },
-   slots.default && slots.default()
+    slots.default && slots.default()
   )
 }
+
+WhiteSpace.displayName = 'WhiteSpace'
 
 export default WhiteSpace

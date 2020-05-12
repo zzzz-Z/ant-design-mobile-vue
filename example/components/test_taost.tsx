@@ -1,6 +1,5 @@
 import { h, defineComponent } from 'vue'
-import { Button, WingBlank, WhiteSpace } from '../packages'
-import Toast from '../packages/toast'
+import { Button, WingBlank, WhiteSpace, Toast } from 'antd'
 
 function click(key: number) {
   switch (key) {

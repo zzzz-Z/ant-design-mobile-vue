@@ -1,37 +1,52 @@
 {
   "name": "antd-mobile-vue",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.0.1",
+  "description": "antd-mobile-vue",
+  "main": "index.js",
   "scripts": {
-    "dev": "cd example && parcel  ./index.html",
-    "build": "npx rollup -c",
+    "dev": "webpack-dev-server",
     "api": "api-extractor run",
-    "lint": "prettier --write  \"packages/**/*.ts?(x)\" \"example/**/*.ts?(x)\""
+    "lint": "prettier --write  \"packages/**/*.ts?(x)\" "
   },
+  "keywords": [
+    "vue@3.0",
+    "antd-mobile-vue"
+  ],
+  "author": "zcc",
+  "license": "MIT",
   "dependencies": {
     "css-animation": "^2.0.4",
     "normalize.css": "^8.0.1",
-    "vue": "3.0.0-beta.10"
+    "vue": "3.0.0-beta.12"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.7",
-    "@microsoft/api-extractor": "^7.8.0",
-    "@types/react": "^16.9.34",
+    "@babel/core": "^7.8.3",
     "@babel/plugin-proposal-optional-chaining": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-typescript": "^7.8.3",
+    "@microsoft/api-extractor": "^7.8.0",
     "@rollup/plugin-commonjs": "^11.0.1",
     "@rollup/plugin-node-resolve": "^7.0.0",
-    "autoprefixer": "^9.7.3",
+    "@vue/compiler-sfc": "^3.0.0-beta.10",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.4.0",
+    "file-loader": "^5.0.2",
+    "html-webpack-plugin": "^3.2.0",
     "less": "^3.11.1",
-    "lint-staged": "^9.5.0",
-    "parcel-bundler": "^1.12.4",
+    "less-loader": "^6.1.0",
+    "lint-staged": "^10.2.2",
+    "mini-css-extract-plugin": "^0.9.0",
     "prettier": "^2.0.5",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-terser": "^5.3.0",
-    "rollup-plugin-typescript2": "^0.27.0",
+    "style-loader": "^1.2.1",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.8.3"
+    "typescript": "^3.7.5",
+    "url-loader": "^3.0.0",
+    "vue-loader": "^16.0.0-beta.1",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
   },
-    "lint-staged": {
+  "lint-staged": {
     "*.js": [
       "prettier --write",
       "git add"
@@ -40,8 +55,5 @@
       "prettier --parser=typescript --write",
       "git add"
     ]
-  },
-  "alias": {
-    "packages": "./packages"
   }
 }

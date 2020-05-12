@@ -1,7 +1,7 @@
 import { Dialog } from '../vc-dialog'
 import { TouchFeedback } from '../feedback'
 import { Action, ModalPropsType } from './PropsType'
-import { FunctionalComponent, h } from 'vue'
+import { FunctionalComponent, h, CSSProperties } from 'vue'
 
 export interface ModalProps extends ModalPropsType {
   prefixCls?: string
@@ -9,14 +9,14 @@ export interface ModalProps extends ModalPropsType {
   maskTransitionName?: string
   class?: string
   wrapClassName?: string
-  wrapProps?: Partial<React.HTMLProps<HTMLDivElement>>
+  wrapProps?: any
   platform?: string
-  style?: React.CSSProperties
-  bodyStyle?: React.CSSProperties
+  style?: CSSProperties
+  bodyStyle?: CSSProperties
 }
 
 function renderFooterButton(
-  button: Action<React.CSSProperties>,
+  button: Action<CSSProperties>,
   prefixCls: string | undefined,
   i: number
 ) {
@@ -35,7 +35,7 @@ function renderFooterButton(
     }
   }
 
-  const onClickFn = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const onClickFn = (e: MouseEvent) => {
     e.preventDefault()
     if (button.onPress) {
       button.onPress()

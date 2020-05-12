@@ -1,3 +1,3 @@
 export interface WingBlankPropsType {
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg'
 }

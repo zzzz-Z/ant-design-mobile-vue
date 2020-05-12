@@ -1,10 +1,10 @@
 import closest from '../_util/closest'
 import Modal from './Modal'
 import { Action } from './PropsType'
-import { createApp, h, reactive } from 'vue'
+import { createApp, h, reactive, CSSProperties } from 'vue'
 
 export default function useOperation(
-  actions: Action<React.CSSProperties>[] = [{ text: '确定' }],
+  actions: Action<CSSProperties>[] = [{ text: '确定' }],
   platform: string = 'ios'
 ) {
   const state = reactive({ visible: true })
@@ -29,7 +29,7 @@ export default function useOperation(
     return button
   })
 
-  function onWrapTouchStart(e: React.TouchEvent<HTMLDivElement>) {
+  function onWrapTouchStart(e: TouchEvent) {
     if (!/iPhone|iPod|iPad/i.test(navigator.userAgent)) {
       return
     }

@@ -17,11 +17,15 @@
     "lib": ["esnext", "dom"],
     "rootDir": ".",
     "paths": {
-      "packages": ["./packages"]
+      "packages": ["./packages"],
+      "antd": ["./packages"],
     },
   },
   "include": [
-    "./packages/**/*.ts",
-    "./packages/**/*.tsx",
+    "example/**/*.ts",
+    "example/**/*.tsx",
+    "example/**/*.vue",
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
   ]
 }

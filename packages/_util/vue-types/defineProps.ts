@@ -19,8 +19,15 @@ export function defineProps(defaultProps: any, othersProps: any = {}) {
           break
         case 'object':
           props[key] = {
-            default: () => v,
-            type: Array.isArray(v) ? Array : Object,
+            default:
+              Array.isArray(v) && v.every((i) => types.includes(i))
+                ? undefined
+                : () => v,
+            type: Array.isArray(v)
+              ? v.every((i) => types.includes(i))
+                ? v
+                : Array
+              : Object,
           }
           break
         case 'function':

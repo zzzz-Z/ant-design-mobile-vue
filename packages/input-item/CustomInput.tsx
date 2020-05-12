@@ -29,7 +29,7 @@ export interface NumberInputProps {
   value?: string
   prefixCls?: string
   keyboardPrefixCls?: string
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (e: any) => void
   onFocus?: InputEventHandler
   onBlur?: InputEventHandler
   onVirtualKeyboardConfirm?: InputEventHandler
