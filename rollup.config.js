@@ -3,7 +3,7 @@ import babel from 'rollup-plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
-
+import less from 'rollup-plugin-less';
 
 const fs = require('fs-extra')
 const path = require('path')
@@ -14,6 +14,7 @@ function isDir(dir) {
 }
 
 const plugins = [
+  less(),
   commonjs(),
   resolve(),
   typescript(),

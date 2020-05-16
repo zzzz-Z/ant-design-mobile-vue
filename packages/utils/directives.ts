@@ -1,12 +1,5 @@
 //@ts-ignore
-import {
-  withDirectives,
-  VNode,
-  vShow,
-  ObjectDirective,
-  vModelDynamic,
-  vModelText,
-} from 'vue'
+import { withDirectives,VNode, vShow, ObjectDirective, vModelDynamic, vModelText} from 'vue'
 
 interface OutEl extends HTMLElement {
   _handler(e: Event): void

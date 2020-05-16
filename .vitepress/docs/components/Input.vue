@@ -37,7 +37,7 @@
 </template>
 <script >
 import { ref, reactive, getCurrentInstance } from 'vue'
-import { InputItem, Button, WhiteSpace, WingBlank } from '../../packages'
+import { InputItem, Button, WhiteSpace, WingBlank } from '../../../packages/index.ts'
 
 export default {
   components: {

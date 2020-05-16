@@ -6,6 +6,10 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "api": "api-extractor run",
+    "storybook": "start-storybook",
+    "docs:build": "npx vitepress build",
+    "docs:dev": "vitepress",
+    "build": "npx rollup -c",
     "lint": "prettier --write  \"packages/**/*.ts?(x)\" "
   },
   "keywords": [
@@ -15,8 +19,11 @@
   "author": "zcc",
   "license": "MIT",
   "dependencies": {
+    "@storybook/vue": "^5.3.18",
     "css-animation": "^2.0.4",
     "normalize.css": "^8.0.1",
+    "rollup-plugin-less": "^1.1.2",
+    "vitepress": "^0.1.1",
     "vue": "3.0.0-beta.12"
   },
   "devDependencies": {
@@ -27,7 +34,7 @@
     "@microsoft/api-extractor": "^7.8.0",
     "@rollup/plugin-commonjs": "^11.0.1",
     "@rollup/plugin-node-resolve": "^7.0.0",
-    "@vue/compiler-sfc": "^3.0.0-beta.10",
+    "@vue/compiler-sfc": "^3.0.0-beta.12",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.4.0",
     "file-loader": "^5.0.2",
@@ -37,6 +44,8 @@
     "lint-staged": "^10.2.2",
     "mini-css-extract-plugin": "^0.9.0",
     "prettier": "^2.0.5",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-typescript2": "^0.27.1",
     "style-loader": "^1.2.1",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.5",

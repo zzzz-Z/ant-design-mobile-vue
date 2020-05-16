@@ -12,7 +12,7 @@
 </template>
 <script >
 import { ref, reactive, getCurrentInstance } from 'vue'
-import { List } from '../../packages'
+import { List } from '../../../packages/index.ts'
 
 export default {
   components: {
