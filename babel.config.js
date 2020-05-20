@@ -1,9 +1,15 @@
-const transformJsx = require('./scripts/plugins/transform-jsx')
-
 module.exports = {
   presets: [
     ['@babel/preset-env'],
-    ['@babel/preset-typescript', { isTSX: true, allExtensions: true }]
+    ['@babel/preset-typescript'],
   ],
-  plugins: [transformJsx]
+  plugins: [
+    [
+      '@babel/plugin-transform-react-jsx',
+      {
+        "pragma": "jsx", 
+        "pragmaFrag":"JsxFragment"
+      },
+    ],
+  ],
 }
