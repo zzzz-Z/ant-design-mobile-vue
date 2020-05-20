@@ -1,5 +1,5 @@
 <template>
-  <Card>
+  <card>
     <template #header>
       custom header
     </template>
@@ -10,7 +10,7 @@
       custom footer
     </template>
     card
-  </Card>
+  </card>
 </template>
 <script >
 import { ref, reactive, getCurrentInstance } from 'vue'

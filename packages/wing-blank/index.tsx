@@ -1,4 +1,3 @@
-import './style'
 import { WingBlankPropsType } from './PropsType'
 import { h, FunctionalComponent, CSSProperties } from 'vue'
 

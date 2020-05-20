@@ -1,4 +1,3 @@
-import './style'
 import { VcCollapse, VcPanel } from '../vc-collapse'
 import { h, VNode, FunctionalComponent } from 'vue'
 

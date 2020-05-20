@@ -1,4 +1,3 @@
-import './style'
 import { useNotification } from '../vc-notification'
 
 import Icon from '../icon'

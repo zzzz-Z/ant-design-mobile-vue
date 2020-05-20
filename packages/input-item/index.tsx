@@ -1,4 +1,3 @@
-import './style'
 import { useLocale } from '../utils/useLocale'
 import CustomInput from './CustomInput'
 import { InputItemPropsType } from './PropsType'

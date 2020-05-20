@@ -1,4 +1,3 @@
-import './style'
 import { h, VNodeProps, SetupContext } from 'vue'
 import { ListPropsType } from './PropsType'
 import ListItem from './ListItem'
@@ -9,8 +8,13 @@ export interface ListProps extends ListPropsType {
 }
 
 const ListImpl = (props: ListProps, { slots }: SetupContext) => {
-  const { renderHeader, renderFooter, ...restProps } = props
-  const prefixCls = props.prefixCls || 'am-list'
+  const {
+    renderHeader,
+    renderFooter,
+    prefixCls = 'am-list',
+    ...restProps
+  } = props
+
   return h('div', { class: prefixCls, ...restProps }, [
     renderHeader &&
       h(
@@ -33,9 +37,7 @@ ListImpl.ListItem = ListItem
 
 const List = (ListImpl as any) as {
   ListItem: typeof ListItem
-  new (): {
-    $props: VNodeProps & ListProps
-  }
+  new (): { $props: VNodeProps & ListProps }
 }
 
 export { ListItem }

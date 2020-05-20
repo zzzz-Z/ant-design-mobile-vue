@@ -1,4 +1,3 @@
-import './style'
 import { CardPropsType } from './PropsType'
 import { FunctionalComponent, VNode } from 'vue'
 import { isFunction } from 'packages/utils/util'
@@ -51,5 +50,7 @@ const Card: FunctionalComponent<CardProps> = (props, { slots }) => {
     </div>
   )
 }
+
+Card.displayName = 'Card'
 
 export default Card

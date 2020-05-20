@@ -9,6 +9,7 @@
     "docs:build": "npx vitepress build",
     "docs:dev": "vitepress",
     "build": "npx rollup -c",
+    "less": "node ./scripts/build-less-entry",
     "lint": "prettier --write  \"packages/**/*.ts?(x)\" "
   },
   "keywords": [

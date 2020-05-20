@@ -1,4 +1,3 @@
-import './style'
 import { BadgePropsTypes } from './PropsType'
 import { defineComponent, h, CSSProperties } from 'vue'
 import { defineProps } from '../_util/vue-types/defineProps'

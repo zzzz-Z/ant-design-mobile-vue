@@ -36,7 +36,7 @@ export interface InputItemPropsType {
   maxLength?: number
   extra?: VNode
   error?: boolean
-  size?: 'large' | 'small';
+  size?: 'large' | 'small'
   labelNumber?: number
   labelPosition?: 'left' | 'top'
   textAlign?: 'left' | 'center'

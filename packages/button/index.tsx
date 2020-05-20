@@ -1,4 +1,3 @@
-import './style'
 import { ButtonProps } from './PropsType'
 import { defineComponent, h } from 'vue'
 import { TouchFeedback } from '../feedback'

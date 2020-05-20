@@ -1,4 +1,3 @@
-import './style'
 import useAlert from './alert'
 import Modal from './Modal'
 import useOperation from './operation'

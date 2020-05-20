@@ -1,4 +1,3 @@
-import './style'
 import { WhiteSpacePropsType } from './PropsType'
 import { h, FunctionalComponent } from 'vue'
 

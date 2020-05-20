@@ -1,4 +1,3 @@
-import './style'
 import loadSprite from './loadSprite'
 import { IconPropsType } from './PropsType'
 import { defineComponent, h, onMounted } from 'vue'
