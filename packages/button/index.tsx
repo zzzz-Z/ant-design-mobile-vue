@@ -2,30 +2,41 @@ import './style'
 import { ButtonProps } from './PropsType'
 import { defineComponent, h } from 'vue'
 import { TouchFeedback } from '../feedback'
+import { defineProps } from 'packages/_util/vue-types/defineProps'
+import Icon from 'packages/icon'
 
-const buttonProps: any = {
-  prefixCls: { type: String, default: 'am-button' },
-  size: { default: 'arge' },
-  type: String,
-  inline: Boolean,
-  disabled: Boolean,
-  loading: Boolean,
-  activeStyle: { default: {} },
-  activeClassName: String,
-}
-
+/** BUTTON */
 const Button = defineComponent<ButtonProps>({
   name: 'Button',
-  props: buttonProps,
-  emits: ['click'],
-  setup(props, { slots, emit }) {
-    function onClick(e: Event) {
-      emit('click', e)
-    }
+  props: defineProps({
+    prefixCls: 'am-button',
+    size: 'large',
+    type: String,
+    inline: Boolean,
+    disabled: Boolean,
+    loading: Boolean,
+    activeStyle: {},
+    activeClassName: String,
+  }),
+  inheritAttrs: false,
+  setup(props, { slots, emit, attrs }) {
     return () => {
-      const { prefixCls, type, size, inline, disabled, icon, loading } = props
+      const {
+        prefixCls,
+        type,
+        size,
+        inline,
+        disabled,
+        icon,
+        loading,
+        activeStyle,
+        activeClassName,
+        ...restProps
+      } = props
+
       const iconType: any = loading ? 'loading' : icon
       const wrapCls = [
+        attrs.class,
         prefixCls,
         {
           [`${prefixCls}-primary`]: type === 'primary',
@@ -38,17 +49,33 @@ const Button = defineComponent<ButtonProps>({
           [`${prefixCls}-icon`]: !!iconType,
         },
       ]
-      return h(TouchFeedback, props, () =>
-        h(
-          'a',
-          {
-            role: 'button',
-            class: wrapCls,
-            onClick: disabled ? undefined : onClick,
-            'aria-disabled': disabled,
-          },
-          slots.default?.()
-        )
+      return (
+        <TouchFeedback
+          activeClassName={
+            activeClassName || (activeStyle ? `${prefixCls}-active` : undefined)
+          }
+          disabled={disabled}
+          activeStyle={activeStyle}
+        >
+          <a
+            {...restProps}
+            {...attrs}
+            role="button"
+            class={wrapCls}
+            onClick={disabled ? undefined : (e) => emit('click', e)}
+            aria-disabled={disabled}
+          >
+            {slots.default?.()}
+            {icon && (
+              <Icon
+                aria-hidden="true"
+                type={iconType}
+                size={size === 'small' ? 'xxs' : 'md'}
+                className={`${prefixCls}-icon`}
+              />
+            )}
+          </a>
+        </TouchFeedback>
       )
     }
   },

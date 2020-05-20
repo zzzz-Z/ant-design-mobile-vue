@@ -1,6 +1,7 @@
 export { default as InputItem } from './input-item'
 export { default as Badge } from './badge'
 export { default as Button } from './button'
+export { default as Card } from './card'
 export { default as Accordion, Panel } from './accordion'
 export { default as List, ListItem } from './list'
 export { default as Modal } from './modal'

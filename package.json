@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "api": "api-extractor run",
-    "storybook": "start-storybook",
     "docs:build": "npx vitepress build",
     "docs:dev": "vitepress",
     "build": "npx rollup -c",
@@ -19,22 +18,21 @@
   "author": "zcc",
   "license": "MIT",
   "dependencies": {
-    "@storybook/vue": "^5.3.18",
     "css-animation": "^2.0.4",
     "normalize.css": "^8.0.1",
-    "rollup-plugin-less": "^1.1.2",
     "vitepress": "^0.1.1",
-    "vue": "3.0.0-beta.12"
+    "vue": "3.0.0-beta.14"
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",
-    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
+    "@babel/plugin-transform-react-jsx": "^7.9.4",
     "@microsoft/api-extractor": "^7.8.0",
     "@rollup/plugin-commonjs": "^11.0.1",
     "@rollup/plugin-node-resolve": "^7.0.0",
-    "@vue/compiler-sfc": "^3.0.0-beta.12",
+    "@vue/compiler-sfc": "^3.0.0-beta.14",
+    "rollup-plugin-less": "^1.1.2",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.4.0",
     "file-loader": "^5.0.2",

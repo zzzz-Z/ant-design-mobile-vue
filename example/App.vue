@@ -1,9 +1,7 @@
 <template>
   <TestInput />
   <List />
-  <TestJsx @click="()=>''" name='q111' age='222'>
-  <List />
-  </TestJsx>
+  <Card />
 </template>
 
 <script lang='tsx'>
@@ -11,12 +9,12 @@ import { ref, reactive } from 'vue'
 import Total from './components/test_taost'
 import TestInput from './components/Input.vue'
 import List from './components/List.vue'
-import TestJsx from './test';
+import Card from './components/Card.vue'
 export default {
   components: {
     TestInput,
     List,
-    TestJsx
+    Card,
   },
 }
 </script>
