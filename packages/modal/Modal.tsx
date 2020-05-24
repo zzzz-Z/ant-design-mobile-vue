@@ -1,4 +1,4 @@
-import { Dialog } from '../vc-dialog'
+import Dialog from '../vc-dialog'
 import { TouchFeedback } from '../feedback'
 import { Action, ModalPropsType } from './PropsType'
 import { FunctionalComponent, h, CSSProperties } from 'vue'
@@ -59,57 +59,40 @@ function renderFooterButton(
   )
 }
 
-const ModalComponent: FunctionalComponent<ModalProps> = (_props, { slots }) => {
-  const props: ModalProps = {
-    prefixCls: 'am-modal',
-    transparent: false,
-    popup: false,
-    wrapClassName: '',
-    animationType: 'slide-down',
-    animated: true,
-    footer: [],
-    closable: false,
-    operation: false,
-    platform: 'ios',
-    visible: false,
-    ..._props,
-  }
-
+const ModalComponent: FunctionalComponent<ModalProps> = (props, { slots }) => {
   const {
-    prefixCls,
-    wrapClassName,
+    prefixCls = 'am-modal',
+    transparent = false,
+    popup = false,
+    wrapClassName = '',
+    animationType = 'slide-down',
+    animated = true,
+    footer = [],
+    closable = false,
+    operation = false,
+    platform = 'ios',
+    visible = false,
     transitionName,
     maskTransitionName,
-    platform,
-    footer = [],
-    operation,
-    animated,
-    transparent,
-    popup,
-    animationType,
     ...restProps
   } = props
 
-  const footerDom = footer.length
-    ? h(
-        'div',
-        {
-          role: 'group',
-          class: [
-            `${prefixCls}-button-group-${
-              footer.length === 2 && !operation ? 'h' : 'v'
-            }`,
-            `${prefixCls}-button-group-${operation ? 'operation' : 'normal'}`,
-          ],
-        },
-        footer.map((button, i) => renderFooterButton(button, prefixCls, i))
-      )
-    : null
+  const ftcls = [
+    `${prefixCls}-button-group-${
+      footer.length === 2 && !operation ? 'h' : 'v'
+    }`,
+    `${prefixCls}-button-group-${operation ? 'operation' : 'normal'}`,
+  ]
+
+  const footerDom = footer.length ? (
+    <div role="group" class={ftcls}>
+      {footer.map((button, i) => renderFooterButton(button, prefixCls, i))}
+    </div>
+  ) : null
 
   let transName
   let maskTransName
   if (animated) {
-    // tslint:disable-next-line:prefer-conditional-expression
     if (transparent) {
       transName = maskTransName = 'am-fade'
     } else {

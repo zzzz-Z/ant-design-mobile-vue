@@ -1,5 +1,5 @@
 import { ButtonProps } from './PropsType'
-import { defineComponent, h } from 'vue'
+import { defineComponent, cloneVNode } from 'vue'
 import { TouchFeedback } from '../feedback'
 import { defineProps } from 'packages/_util/vue-types/defineProps'
 import Icon from 'packages/icon'
@@ -11,6 +11,7 @@ const Button = defineComponent<ButtonProps>({
     prefixCls: 'am-button',
     size: 'large',
     type: String,
+    icon: String,
     inline: Boolean,
     disabled: Boolean,
     loading: Boolean,
@@ -34,6 +35,26 @@ const Button = defineComponent<ButtonProps>({
       } = props
 
       const iconType: any = loading ? 'loading' : icon
+      let iconEl
+      if (typeof iconType === 'string') {
+        iconEl = (
+          <Icon
+            aria-hidden="true"
+            type={iconType}
+            size={size === 'small' ? 'xxs' : 'md'}
+            class={`${prefixCls}-icon`}
+          />
+        )
+      } else if (iconType) {
+        iconEl = cloneVNode(iconType, {
+          class: [
+            'am-icon',
+            `${prefixCls}-icon`,
+            size === 'small' ? 'am-icon-xxs' : 'am-icon-md',
+          ],
+        })
+      }
+
       const wrapCls = [
         attrs.class,
         prefixCls,
@@ -64,15 +85,8 @@ const Button = defineComponent<ButtonProps>({
             onClick={disabled ? undefined : (e) => emit('click', e)}
             aria-disabled={disabled}
           >
+            {iconEl}
             {slots.default?.()}
-            {icon && (
-              <Icon
-                aria-hidden="true"
-                type={iconType}
-                size={size === 'small' ? 'xxs' : 'md'}
-                className={`${prefixCls}-icon`}
-              />
-            )}
           </a>
         </TouchFeedback>
       )

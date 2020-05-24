@@ -5,4 +5,6 @@ import { Fragment } from 'vue'
 ;(window as any).jsx = jsx
 ;(window as any).JsxFragment = Fragment
 
-createApp(App).mount('#app')
+const APP = createApp(App)
+APP.config.warnHandler = () => {}
+APP.mount('#app')

@@ -32,7 +32,7 @@
       居左对齐
     </InputItem>
     <white-space />
-    <Button type="danger" @click="click">click</Button>
+    <Button icon="check"  type="ghost" @click="click">click</Button>
   </WingBlank>
 </template>
 <script >

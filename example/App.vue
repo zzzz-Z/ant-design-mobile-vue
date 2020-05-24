@@ -1,8 +1,12 @@
 <template>
-  <TestInput />
-  <List />
-  <Card />
-  <Flex />
+  <!-- <TestInput /> -->
+  <!-- <Total @click="() => {}" /> -->
+  <!-- <List /> -->
+  <!-- <Card /> -->
+  <!-- <Flex /> -->
+  <!-- <Icon type='check' /> -->
+  <!-- <Icon type='loading' /> -->
+  <Calendar />
 </template>
 
 <script lang='tsx'>
@@ -12,16 +16,18 @@ import TestInput from './components/Input.vue'
 import List from './components/List.vue'
 import Card from './components/Card.vue'
 import Flex from './components/Flex.vue'
+import Calendar from './components/Calendar'
+
 export default {
   components: {
+    Total,
+    Calendar,
     TestInput,
     List,
     Card,
-    Flex
+    Flex,
   },
-  setup() {
-    console.log(getCurrentInstance())
-  },
+  created() {},
 }
 </script>
 

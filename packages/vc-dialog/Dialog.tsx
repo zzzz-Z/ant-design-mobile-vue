@@ -1,8 +1,8 @@
-import dialogProps from './IDialogPropTypes'
+import { dialogProps, IDialogPropTypes } from './IDialogPropTypes'
 import { withVshow } from 'packages/utils/directives'
 import { defineComponent, h, Transition, Teleport, mergeProps } from 'vue'
 
-const Dialog = defineComponent({
+const Dialog = defineComponent<IDialogPropTypes>({
   name: 'Dialog',
   props: dialogProps as any,
   inheritAttrs: false,
@@ -139,36 +139,58 @@ const Dialog = defineComponent({
       }
     }
 
-    return () =>
-      h(
-        Teleport,
-        { to: getContainer(), disabled: true },
-        h(
-          Transition,
-          {
-            name: getTransitionName(),
-            onAfterLeave: (e) => emit('leave', e),
-          },
-          () =>
-            props.visible
-              ? h('div', [
-                  getMaskElement(),
-                  h(
-                    'div',
-                    {
-                      style: getWrapStyle(),
-                      class: [`${props.prefixCls}-wrap `, props.wrapClassName],
-                      onClick: props.maskClosable ? onMaskClick : undefined,
-                      role: 'dialog',
-                      'aria-labelledby': props.title,
-                      ...props.wrapProps,
-                    },
-                    getDialogElement()
-                  ),
-                ])
-              : null
-        )
-      )
+    return () => (
+      <Teleport to={getContainer()} disabled={true}>
+        <Transition
+          name={getTransitionName()}
+          onAfterLeave={(e) => emit('leave', e)}
+        >
+          {props.visible ? (
+            <div>
+              {getMaskElement()}
+              <div
+                style={getWrapStyle()}
+                class={[`${props.prefixCls}-wrap `, props.wrapClassName]}
+                onClick={props.maskClosable ? onMaskClick : undefined}
+                role="dialog"
+                {...props.wrapProps}
+              >
+                {getDialogElement()}
+              </div>
+            </div>
+          ) : null}
+        </Transition>
+      </Teleport>
+    )
+    // h(
+    //   Teleport,
+    //   { to: getContainer(), disabled: true },
+    //   h(
+    //     Transition,
+    //     {
+    //       name: getTransitionName(),
+    //       onAfterLeave: (e) => emit('leave', e),
+    //     },
+    //     () =>
+    //       props.visible
+    //         ? h('div', [
+    //             getMaskElement(),
+    //             h(
+    //               'div',
+    //               {
+    //                 style: getWrapStyle(),
+    //                 class: [`${props.prefixCls}-wrap `, props.wrapClassName],
+    //                 onClick: props.maskClosable ? onMaskClick : undefined,
+    //                 role: 'dialog',
+    //                 'aria-labelledby': props.title,
+    //                 ...props.wrapProps,
+    //               },
+    //               getDialogElement()
+    //             ),
+    //           ])
+    //         : null
+    //   )
+    // )
   },
 })
 

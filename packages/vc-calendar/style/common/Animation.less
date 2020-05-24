@@ -1,0 +1,95 @@
+.@{prefixClass} {
+
+  .animate {
+    animation-duration: .3s;
+    animation-fill-mode: both;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  .fade-enter {
+    animation-name: fadeIn;
+  }
+
+  .fade-leave {
+    animation-name: fadeOut;
+  }
+
+  @keyframes slideInUp {
+    0% {
+      transform: translate3d(0, 100%, 0);
+      visibility: visible;
+    }
+
+    to {
+      transform: translateZ(0);
+    }
+  }
+
+  @keyframes slideInDown {
+    0% {
+      transform: translateZ(0);
+      visibility: visible;
+    }
+
+    to {
+      transform: translate3d(0, 100%, 0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    0% {
+      transform: translate3d(100%, 0, 0);
+      visibility: visible;
+    }
+
+    to {
+      transform: translateZ(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    0% {
+      transform: translateZ(0);
+      visibility: visible;
+    }
+
+    to {
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+
+  .slideV-enter {
+    animation-name: slideInUp;
+  }
+
+  .slideV-leave {
+    animation-name: slideInDown;
+  }
+
+  .slideH-enter {
+    animation-name: slideInLeft;
+  }
+
+  .slideH-leave {
+    animation-name: slideInRight;
+  }
+}

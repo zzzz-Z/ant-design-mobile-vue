@@ -4,11 +4,12 @@ module.exports = {
     ['@babel/preset-typescript'],
   ],
   plugins: [
+    "transform-class-properties",
     [
       '@babel/plugin-transform-react-jsx',
       {
-        "pragma": "jsx", 
-        "pragmaFrag":"JsxFragment"
+        "pragma": "jsx",
+        "pragmaFrag": "JsxFragment"
       },
     ],
   ],

@@ -1,5 +1,5 @@
-import { h, defineComponent } from 'vue'
-import { Button, WingBlank, WhiteSpace, Toast } from 'antd'
+import { h, defineComponent, getCurrentInstance } from 'vue'
+import { Button, WingBlank, WhiteSpace, Toast, Icon } from 'antd'
 
 function click(key: number) {
   switch (key) {
@@ -32,13 +32,29 @@ function click(key: number) {
 }
 
 export default defineComponent({
-  setup() {
+  props: {
+    // onClick: Function,
+  },
+  setup(_, { slots, attrs, emit }) {
+    const v = getCurrentInstance()
+    console.log(v);
+    console.log({ ..._ })
+    console.log({ ...attrs })
     return () =>
       h(WingBlank, () =>
-        [1, 2, 3, 4, 5, 6].map((n) => [
-          h(WhiteSpace),
-          h(Button, { onClick: () => click(n) }, () => 'button'),
-        ])
+        [1, 2, 3, 4, 5, 6].map((n) => (
+          <>
+            <WhiteSpace />
+            <Button
+              onClick={() => {
+                // click(n)
+                emit('click')
+              }}
+            >
+              <Icon type="check" />
+            </Button>
+          </>
+        ))
       )
   },
 })

@@ -23,11 +23,14 @@ export function defineProps(defaultProps: any, othersProps: any = {}) {
               Array.isArray(v) && v.every((i) => types.includes(i))
                 ? undefined
                 : () => v,
-            type: Array.isArray(v)
-              ? v.every((i) => types.includes(i))
-                ? v
-                : Array
-              : Object,
+            type:
+              v instanceof Date
+                ? Date
+                : Array.isArray(v)
+                ? v.every((i) => types.includes(i))
+                  ? v
+                  : Array
+                : Object,
           }
           break
         case 'function':
@@ -52,4 +55,14 @@ export function defineProps(defaultProps: any, othersProps: any = {}) {
     props[key] = { ...props[key], ...othersProps[key] }
   })
   return props
+}
+
+export function removeEventsProp(props: { [key: string]: any }) {
+  const _props: any = {}
+  Object.keys(props).forEach((key) => {
+    if (key.slice(0, 2) !== 'on') {
+      _props[key] = props[key]
+    }
+  })
+  return _props
 }

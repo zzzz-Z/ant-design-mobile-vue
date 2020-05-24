@@ -9,7 +9,6 @@
 import { ref, reactive, getCurrentInstance } from 'vue'
 import { Flex } from '../../packages'
 
-console.log(Flex.Item);
 export default {
   components: {
     Flex,

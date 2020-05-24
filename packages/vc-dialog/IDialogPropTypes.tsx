@@ -1,6 +1,31 @@
 import { VNode, PropType } from 'vue'
-
-export const dialogPropTypes = {
+export interface IDialogPropTypes {
+  className?: string
+  style?: {}
+  mask?: boolean
+  children?: any
+  afterClose?: () => void
+  onClose?: (e: any) => void
+  closable?: boolean
+  maskClosable?: boolean
+  visible?: boolean
+  title?: VNode | string
+  footer?: VNode | string
+  transitionName?: string
+  maskTransitionName?: string
+  animation?: any
+  maskAnimation?: any
+  wrapStyle?: {}
+  bodyStyle?: {}
+  maskStyle?: {}
+  prefixCls?: string
+  wrapClassName?: string
+  onAnimateLeave?: () => void
+  zIndex?: number
+  maskProps?: any
+  wrapProps?: any
+}
+export const dialogProps = {
   mask: { default: true, type: Boolean as PropType<boolean> },
   visible: { default: false, type: Boolean as PropType<boolean> },
   keyboard: { default: true, type: Boolean as PropType<boolean> },
@@ -23,5 +48,3 @@ export const dialogPropTypes = {
   maskProps: Object,
   wrapProps: Object,
 }
-
-export default dialogPropTypes

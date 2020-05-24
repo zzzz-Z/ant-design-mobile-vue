@@ -14,9 +14,7 @@ const Icon = defineComponent<IconProps>({
     color: String,
   } as any,
   setup(props) {
-    onMounted(() => {
-      loadSprite()
-    })
+    onMounted(loadSprite)
     return () => {
       const { type, size } = props
       return h(
@@ -24,7 +22,7 @@ const Icon = defineComponent<IconProps>({
         {
           class: ['am-icon', `am-icon-${type}`, `am-icon-${size}`],
         },
-        h('use', { xlinkHref: `#${type}` })
+        h('use', { 'xlink:href': `#${type}` })
       )
     }
   },
