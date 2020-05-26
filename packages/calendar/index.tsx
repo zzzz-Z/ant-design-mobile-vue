@@ -10,9 +10,9 @@ export default defineComponent<CalendarProps>({
   inheritAttrs: false,
   setup(_, { slots, attrs }) {
     const defaultProps = {
-      // prefixCls: 'am-calendar',
-      // timePickerPrefixCls: 'am-picker',
-      // timePickerPickerPrefixCls: 'am-picker-col',
+      prefixCls: 'am-calendar',
+      timePickerPrefixCls: 'am-picker',
+      timePickerPickerPrefixCls: 'am-picker-col',
     }
     const { getLocale } = useLocale('Calendar', () => require('./locale/zh_CN'))
     return () => (
