@@ -16,7 +16,7 @@ export const withVshow = (node: VNode, exp: boolean | undefined) => {
   return withDirectives(node, [[vShow, exp]])
 }
 /** as vif */
-export const withVif = (node: VNode, exp: any) => {
+export const withVif = (node: JSX.Element, exp: any) => {
   return exp ? node : null
 }
 

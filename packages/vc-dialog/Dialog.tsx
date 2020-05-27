@@ -18,7 +18,6 @@ const Dialog = defineComponent<IDialogPropTypes>({
   setup(props, { slots, attrs, emit }) {
     const wrapRef = ref<HTMLDivElement | null>(null)
     const rootRef = ref<HTMLDivElement | null>(null)
-    const state = reactive({ visible: props.visible })
 
     function getZIndexStyle() {
       const style: any = {}

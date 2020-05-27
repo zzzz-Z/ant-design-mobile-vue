@@ -17,6 +17,7 @@ const getTransitionProps = (
       animate(el, `${name}-enter`, done)
     },
     onLeave: (el, done) => {
+      console.log(name)
       animate(el, `${name}-leave`, done)
     },
     ...opt,

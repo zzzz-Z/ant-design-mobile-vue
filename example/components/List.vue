@@ -6,14 +6,13 @@
       extra="请选择(可选)"
       :data="state"
     >
-      <ListItem
-        z="ss"
-        arrow="horizontal"
-        extra="dddd"
-      >
+      <ListItem arrow="horizontal" extra="dddd">
         Title
       </ListItem>
     </Picker>
+    <ListItem arrow="horizontal" extra="dddd">
+      Title
+    </ListItem>
   </List>
 </template>
 <script >

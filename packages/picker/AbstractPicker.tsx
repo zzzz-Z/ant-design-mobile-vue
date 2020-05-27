@@ -5,6 +5,7 @@ import { VCPicker, PickerItem, MultiPicker } from '../vc-picker'
 import { useLocale } from '../utils/useLocale'
 import { PickerData, PickerPropsType } from './PropsType'
 import { VNode, defineComponent, isVNode, cloneVNode, computed } from 'vue'
+import popupProps from './popupProps'
 
 export interface AbstractPickerProps extends PickerPropsType {
   pickerPrefixCls?: string
@@ -42,7 +43,6 @@ export default defineComponent<AbstractPickerProps>({
       } as any) as AbstractPickerProps
     })
     let scrollValue: any = null
-    const popupProps = {}
 
     const getSel = () => {
       let treeChildren: PickerData[]
@@ -107,7 +107,6 @@ export default defineComponent<AbstractPickerProps>({
       scrollValue = v
     }
     const fixOnOk = (cascader: any) => {
-      console.log(cascader)
       if (cascader && cascader.onOk !== onOk) {
         cascader.onOk = onOk
         cascader.$forceUpdate()
@@ -175,14 +174,12 @@ export default defineComponent<AbstractPickerProps>({
           pickerValueProp: 'selectedValue',
           pickerValueChangeProp: 'onValueChange',
         }
-      console.log(cascader)
-
       }
       return (
         <VCPopupCascader
           cascader={cascader}
           {...popupProps}
-          {...restProps}
+          // {...restProps}
           prefixCls={popupPrefixCls}
           value={value}
           dismissText={dismissText || _locale.dismissText}

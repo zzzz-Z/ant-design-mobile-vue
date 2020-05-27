@@ -1,16 +1,16 @@
 import { VNode, CSSProperties } from 'vue'
 
 export interface ListPropsType {
-  renderHeader?: (() => VNode) | VNode
-  renderFooter?: (() => VNode) | VNode
+  renderHeader?: JSX.Element
+  renderFooter?: JSX.Element
 }
 
 export interface ListItemPropsType {
   align?: 'top' | 'middle' | 'bottom'
   disabled?: boolean
   multipleLine?: boolean
-  thumb?: VNode | null
-  extra?: VNode
+  thumb?: JSX.Element
+  extra?: JSX.Element
   arrow?: 'horizontal' | 'down' | 'up' | 'empty' | ''
   wrap?: boolean
   activeStyle?: CSSProperties

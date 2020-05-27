@@ -6,7 +6,7 @@
   <!-- <Icon type='check' /> -->
   <!-- <Icon type='loading' /> -->
   <Calendar />
-  <!-- <Picker /> -->
+  <Picker />
 </template>
 
 <script lang='tsx'>

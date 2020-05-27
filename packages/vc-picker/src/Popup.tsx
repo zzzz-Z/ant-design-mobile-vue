@@ -17,15 +17,15 @@ const getModal = (
   visible: any,
   { getContent, hide, onDismiss, onOk }: any
 ) => {
-  if (!visible) {
-    return null
-  }
+  // if (!visible) {
+  //   return null
+  // }
   const { prefixCls } = props
   return (
     <Modal
+      visible={visible}
       prefixCls={`${prefixCls}`}
       class={props.className || ''}
-      visible={true}
       closable={false}
       transitionName={props.transitionName || props.popupTransitionName}
       maskTransitionName={props.maskTransitionName}

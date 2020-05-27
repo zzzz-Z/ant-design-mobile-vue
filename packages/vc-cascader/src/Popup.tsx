@@ -9,7 +9,6 @@ export interface IPopupCascaderProps extends IPopupPickerProps {
 }
 
 const PopupCascader = defineComponent({
-  inheritAttrs: false,
   setup(_, { attrs, emit, slots }) {
     return () => (
       <PopupPicker

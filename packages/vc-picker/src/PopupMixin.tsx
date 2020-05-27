@@ -24,6 +24,7 @@ export default function PopupMixin(getModal: any, platformProps = {}) {
       title: '',
       ...platformProps,
     }),
+    inheritAttrs:false,
     setup(props, { slots, emit }) {
       let picker = ref<any>(null)
       const state = reactive({

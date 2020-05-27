@@ -1,10 +1,7 @@
-import { defineComponent, h } from 'vue'
+import { defineComponent, Text, Fragment } from 'vue'
 import { Picker, List } from 'packages'
-import ListItem from 'packages/list/ListItem'
 export default defineComponent({
   setup() {
-    console.log(h(ListItem))
-
     const seasons = [
       [
         {
@@ -29,15 +26,18 @@ export default defineComponent({
     ]
     return () => {
       return (
-        <Picker
-          data={seasons}
-          title="选择季节"
-          cascade={false}
-          extra="请选择(可选)"
-        >
-          <ListItem arrow="horizontal">122</ListItem>
-          {/* <List.ListItem arrow="horizontal">111</List.ListItem> */}
-        </Picker>
+        <List renderHeader="zzz" renderFooter="sss">
+          <Picker
+            data={seasons}
+            title="选择季节"
+            cascade={false}
+            extra="请选择(可选)"
+          >
+            <List.ListItem arrow="horizontal" extra="ddd">
+              <span color='red'>222</span>
+            </List.ListItem>
+          </Picker>
+        </List>
       )
     }
   },
