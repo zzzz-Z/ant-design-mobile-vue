@@ -1,9 +1,9 @@
 <template>
   <!-- <TestInput /> -->
-  <!-- <Total @click="() => {}" /> -->
+  <Total />
   <!-- <List /> -->
   <!-- <Card /> -->
-  <!-- <Flex /> -->
+  <Modal />
   <!-- <Icon type='check' /> -->
   <!-- <Icon type='loading' /> -->
   <Calendar />
@@ -12,6 +12,7 @@
 <script lang='tsx'>
 import { ref, reactive, getCurrentInstance } from 'vue'
 import Total from './components/test_taost'
+import Modal from './components/test_modal'
 import TestInput from './components/Input.vue'
 import List from './components/List.vue'
 import Card from './components/Card.vue'
@@ -25,7 +26,7 @@ export default {
     TestInput,
     List,
     Card,
-    Flex,
+    Modal,
   },
   created() {},
 }
