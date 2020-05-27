@@ -1,4 +1,4 @@
-import { VNode, PropType } from 'vue'
+import { VNode, PropType, CSSProperties } from 'vue'
 export interface IDialogPropTypes {
   className?: string
   style?: {}
@@ -9,8 +9,8 @@ export interface IDialogPropTypes {
   closable?: boolean
   maskClosable?: boolean
   visible?: boolean
-  title?: VNode | string
-  footer?: VNode | string
+  title?: any
+  footer?: any
   transitionName?: string
   maskTransitionName?: string
   animation?: any
@@ -19,7 +19,7 @@ export interface IDialogPropTypes {
   bodyStyle?: {}
   maskStyle?: {}
   prefixCls?: string
-  wrapClassName?: string
+  wrapClassName?: any
   onAnimateLeave?: () => void
   zIndex?: number
   maskProps?: any

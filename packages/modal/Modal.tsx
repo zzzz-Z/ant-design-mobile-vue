@@ -126,10 +126,11 @@ const ModalComponent: FunctionalComponent<ModalProps> = (props, { slots }) => {
       ...restProps,
       prefixCls,
       class: cls,
+      visible,
       wrapClassName: wrapCls,
       transitionName: transitionName || transName,
       maskTransitionName: maskTransitionName || maskTransName,
-      footer: footerDom!,
+      footer: footerDom,
     },
     () => slots.default?.()
   )

@@ -8,6 +8,8 @@ import { CalendarPropsType, calendarProps } from './CalendarProps'
 import { mergeDateTime } from './util'
 import { defineComponent, reactive, watch, Transition } from 'vue'
 import { Locale } from './date/DataTypes'
+import getTransitionProps from 'packages/utils/getTransitionProps'
+import { withVshow } from 'packages/utils/directives'
 
 export class StateTypes {
   showTimePicker: boolean = false
@@ -209,68 +211,70 @@ export default defineComponent<CalendarPropsType>({
         onClear: onClear,
       }
 
+      const content = (
+        <AnimateWrapper class="content">
+          {renderHeader?.(headerProps) || <Header {...headerProps} />}
+          <DatePicker
+            locale={locale}
+            type={type}
+            prefixCls={prefixCls}
+            infiniteOpt={infiniteOpt}
+            initalMonths={initalMonths}
+            defaultDate={defaultDate}
+            minDate={minDate}
+            maxDate={maxDate}
+            getDateExtra={getDateExtra}
+            onCellClick={onSelectedDate}
+            onSelectHasDisableDate={onSelectHasDisableDate}
+            onLayout={setClientHeight}
+            startDate={startDate}
+            endDate={endDate}
+            rowSize={rowSize}
+          />
+          {showTimePicker && (
+            <TimePicker
+              prefixCls={timePickerPrefixCls}
+              pickerPrefixCls={timePickerPickerPrefixCls}
+              locale={locale}
+              title={timePickerTitle}
+              defaultValue={defaultTimeValue}
+              value={endDate ? endDate : startDate}
+              onValueChange={onTimeChange}
+              minDate={minDate}
+              maxDate={maxDate}
+              clientHeight={clientHight}
+            />
+          )}
+          {showShortcut &&
+            !showTimePicker &&
+            (renderShortcut ? (
+              renderShortcut(shortcutSelect)
+            ) : (
+              <ShortcutPanel locale={locale} onSelect={shortcutSelect} />
+            ))}
+          {startDate && (
+            <ConfirmPanel
+              type={type}
+              locale={locale}
+              startDateTime={startDate}
+              endDateTime={endDate}
+              onConfirm={onConfirm}
+              disableBtn={disConfirmBtn}
+              formatStr={pickTime ? locale.dateTimeFormat : locale.dateFormat}
+            />
+          )}
+        </AnimateWrapper>
+      )
+      const contentTrsProps = getTransitionProps(
+        enterDirection === 'horizontal' ? 'slideH' : 'slideV'
+      )
       return (
         <div class={`${prefixCls}`}>
-          <Transition name="fade">
-            <AnimateWrapper className="mask" visible={!!visible} />
+          <Transition {...getTransitionProps('fade')}>
+            {withVshow((<AnimateWrapper class="mask" />) as any, visible)}
           </Transition>
-          <Transition
-            name={enterDirection === 'horizontal' ? 'slideH' : 'slideV'}
-          >
-            <AnimateWrapper className="content" visible={!!visible}>
-              {renderHeader?.(headerProps) || <Header {...headerProps} />}
-              <DatePicker
-                locale={locale}
-                type={type}
-                prefixCls={prefixCls}
-                infiniteOpt={infiniteOpt}
-                initalMonths={initalMonths}
-                defaultDate={defaultDate}
-                minDate={minDate}
-                maxDate={maxDate}
-                getDateExtra={getDateExtra}
-                onCellClick={onSelectedDate}
-                onSelectHasDisableDate={onSelectHasDisableDate}
-                onLayout={setClientHeight}
-                startDate={startDate}
-                endDate={endDate}
-                rowSize={rowSize}
-              />
-              {showTimePicker && (
-                <TimePicker
-                  prefixCls={timePickerPrefixCls}
-                  pickerPrefixCls={timePickerPickerPrefixCls}
-                  locale={locale}
-                  title={timePickerTitle}
-                  defaultValue={defaultTimeValue}
-                  value={endDate ? endDate : startDate}
-                  onValueChange={onTimeChange}
-                  minDate={minDate}
-                  maxDate={maxDate}
-                  clientHeight={clientHight}
-                />
-              )}
-              {showShortcut &&
-                !showTimePicker &&
-                (renderShortcut ? (
-                  renderShortcut(shortcutSelect)
-                ) : (
-                  <ShortcutPanel locale={locale} onSelect={shortcutSelect} />
-                ))}
-              {startDate && (
-                <ConfirmPanel
-                  type={type}
-                  locale={locale}
-                  startDateTime={startDate}
-                  endDateTime={endDate}
-                  onConfirm={onConfirm}
-                  disableBtn={disConfirmBtn}
-                  formatStr={
-                    pickTime ? locale.dateTimeFormat : locale.dateFormat
-                  }
-                />
-              )}
-            </AnimateWrapper>
+          <Transition {...contentTrsProps}>
+            {withVshow(content as any, visible)}
           </Transition>
         </div>
       )

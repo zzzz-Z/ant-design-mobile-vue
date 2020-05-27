@@ -1,12 +1,25 @@
 import { dialogProps, IDialogPropTypes } from './IDialogPropTypes'
 import { withVshow } from 'packages/utils/directives'
-import { defineComponent, h, Transition, Teleport, mergeProps } from 'vue'
+import {
+  defineComponent,
+  h,
+  Transition,
+  Teleport,
+  mergeProps,
+  ref,
+  reactive,
+} from 'vue'
+import getTransitionProps from 'packages/utils/getTransitionProps'
 
 const Dialog = defineComponent<IDialogPropTypes>({
   name: 'Dialog',
   props: dialogProps as any,
   inheritAttrs: false,
   setup(props, { slots, attrs, emit }) {
+    const wrapRef = ref<HTMLDivElement | null>(null)
+    const rootRef = ref<HTMLDivElement | null>(null)
+    const state = reactive({ visible: props.visible })
+
     function getZIndexStyle() {
       const style: any = {}
       if (props.zIndex !== undefined) {
@@ -40,13 +53,11 @@ const Dialog = defineComponent<IDialogPropTypes>({
       if (!transitionName && animation) {
         transitionName = `${props.prefixCls}-${animation}`
       }
-
       return transitionName
     }
 
     function getMaskElement() {
       let maskElement
-
       if (props.mask) {
         const maskTransition = getMaskTransitionName()
         maskElement = withVshow(
@@ -58,10 +69,9 @@ const Dialog = defineComponent<IDialogPropTypes>({
           }),
           props.visible
         )
-
         return maskTransition
           ? maskElement
-          : h(Transition, { name: maskTransition }, maskElement)
+          : h(Transition, getTransitionProps(maskTransition!), maskElement)
       }
     }
 
@@ -139,58 +149,50 @@ const Dialog = defineComponent<IDialogPropTypes>({
       }
     }
 
-    return () => (
-      <Teleport to={getContainer()} disabled={true}>
-        <Transition
-          name={getTransitionName()}
-          onAfterLeave={(e) => emit('leave', e)}
-        >
-          {props.visible ? (
-            <div>
+    function onAfterLeave() {
+      document.body.style.overflow = ''
+      const wrapDiv = wrapRef.value
+      if (wrapDiv) {
+        wrapDiv.style.display = 'none'
+      }
+      rootRef.value = null
+      emit('animateLeave')
+      props.afterClose?.()
+    }
+
+    function getComponent() {
+      const rootDiv = rootRef.value
+      if (props.visible || rootDiv) {
+        const wrapStyle = getWrapStyle()
+        const name = getTransitionName()!
+        const transitionProps = getTransitionProps(name, { onAfterLeave })
+        wrapStyle.display = null
+
+        return (
+          <Teleport to={getContainer()}>
+            <div ref={rootRef}>
               {getMaskElement()}
               <div
-                style={getWrapStyle()}
+                ref={wrapRef}
+                style={wrapStyle}
                 class={[`${props.prefixCls}-wrap `, props.wrapClassName]}
                 onClick={props.maskClosable ? onMaskClick : undefined}
                 role="dialog"
                 {...props.wrapProps}
               >
-                {getDialogElement()}
+                <Transition {...transitionProps}>
+                  {props.visible ? getDialogElement() : null}
+                </Transition>
               </div>
             </div>
-          ) : null}
-        </Transition>
-      </Teleport>
-    )
-    // h(
-    //   Teleport,
-    //   { to: getContainer(), disabled: true },
-    //   h(
-    //     Transition,
-    //     {
-    //       name: getTransitionName(),
-    //       onAfterLeave: (e) => emit('leave', e),
-    //     },
-    //     () =>
-    //       props.visible
-    //         ? h('div', [
-    //             getMaskElement(),
-    //             h(
-    //               'div',
-    //               {
-    //                 style: getWrapStyle(),
-    //                 class: [`${props.prefixCls}-wrap `, props.wrapClassName],
-    //                 onClick: props.maskClosable ? onMaskClick : undefined,
-    //                 role: 'dialog',
-    //                 'aria-labelledby': props.title,
-    //                 ...props.wrapProps,
-    //               },
-    //               getDialogElement()
-    //             ),
-    //           ])
-    //         : null
-    //   )
-    // )
+          </Teleport>
+        )
+      } else {
+        return null
+      }
+    }
+
+    return getComponent
   },
 })
 

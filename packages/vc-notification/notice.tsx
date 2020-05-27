@@ -1,4 +1,4 @@
-import { h, defineComponent, onMounted, onBeforeUnmount } from 'vue'
+import { defineComponent, onMounted, onBeforeUnmount } from 'vue'
 import { defineProps } from '../_util/vue-types/defineProps'
 interface Notice {
   duration?: number
@@ -20,12 +20,6 @@ export default defineComponent<Notice>({
   }),
   setup(props, { slots, emit }) {
     let closeTimer: number | null
-    onMounted(() => {
-      startCloseTimer()
-    })
-    onBeforeUnmount(() => {
-      clearCloseTimer()
-    })
     const close = () => {
       clearCloseTimer()
       emit('close')
@@ -44,6 +38,8 @@ export default defineComponent<Notice>({
         }, props.duration * 1000)
       }
     }
+    onMounted(startCloseTimer)
+    onBeforeUnmount(clearCloseTimer)
 
     return () => {
       const componentClass = `${props.prefixCls}-notice`
@@ -54,26 +50,15 @@ export default defineComponent<Notice>({
           [`${componentClass}-closable`]: props.closable,
         },
       ]
-      return h(
-        'div',
-        {
-          style: props.style,
-          class: className,
-        },
-        [
-          h('div', { class: `${componentClass}-content` }, slots.default?.()),
-          props.closable
-            ? h(
-                'a',
-                {
-                  tabIndex: '0',
-                  onClick: close,
-                  class: `${componentClass}-close`,
-                },
-                h('span', { class: `${componentClass}-close-x` })
-              )
-            : null,
-        ]
+      return (
+        <div style={props.style} class={className}>
+          <div class={`${componentClass}-content`}>{slots.default?.()} </div>
+          {props.closable ? (
+            <a tabindex={0} onClick={close} class={`${componentClass}-close`}>
+              <span class={`${componentClass}-close-x`} />
+            </a>
+          ) : null}
+        </div>
       )
     }
   },

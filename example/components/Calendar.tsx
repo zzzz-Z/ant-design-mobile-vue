@@ -20,7 +20,8 @@ export default defineComponent({
         onSelect={val => {
           console.log(val);
         }}
-        enterDirection='horizontal'
+        
+        enterDirection='vertical'
         showShortcut
         title='zzzz'
         type="range"

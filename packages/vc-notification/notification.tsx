@@ -10,6 +10,7 @@ import {
   VNode,
 } from 'vue'
 import { defineProps } from '../_util/vue-types/defineProps'
+import getTransitionProps from 'packages/utils/getTransitionProps'
 
 let seed = 0
 const now = Date.now()
@@ -68,16 +69,16 @@ export const Notification = defineComponent({
       h(
         'div',
         { class: props.prefixCls, style: props.style },
-        h(TransitionGroup, { name: getTransitionName() }, () =>
-          notices.map((notice) =>
-            h(
-              Notice,
-              {
-                prefixCls: props.prefixCls,
-                onClose: () => remove(notice.key!),
-                ...notice,
-              },
-              () => notice.content
+        h(TransitionGroup, getTransitionProps(getTransitionName()), () =>
+          notices.map(
+            (notice) => (
+              <Notice
+                prefixCls={props.prefixCls}
+                onClose={() => remove(notice.key!)}
+                {...notice}
+              >
+                {notice.content}
+              </Notice>
             )
           )
         )
