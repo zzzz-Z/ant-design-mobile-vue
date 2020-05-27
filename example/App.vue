@@ -1,12 +1,13 @@
 <template>
   <!-- <TestInput /> -->
-  <!-- <Total @click="() => {}" /> -->
-  <!-- <List /> -->
+  <Total />
+  <List />
   <!-- <Card /> -->
   <!-- <Flex /> -->
   <!-- <Icon type='check' /> -->
   <!-- <Icon type='loading' /> -->
   <Calendar />
+  <!-- <Picker /> -->
 </template>
 
 <script lang='tsx'>
@@ -17,7 +18,8 @@ import List from './components/List.vue'
 import Card from './components/Card.vue'
 import Flex from './components/Flex.vue'
 import Calendar from './components/Calendar'
-
+import Picker from './components/Picker'
+import Test from './test'
 export default {
   components: {
     Total,
@@ -25,8 +27,10 @@ export default {
     TestInput,
     List,
     Card,
+    Picker,
     Flex,
   },
+
   created() {},
 }
 </script>

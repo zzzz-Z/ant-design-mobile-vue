@@ -60,9 +60,7 @@ export default function PopupMixin(getModal: any, platformProps = {}) {
 
       function fireVisibleChange(visible: boolean) {
         if (state.visible !== visible) {
-          if (!('visible' in props)) {
-            setVisibleState(visible)
-          }
+          setVisibleState(visible)
           emit('visibleChange', visible)
         }
       }
@@ -84,6 +82,7 @@ export default function PopupMixin(getModal: any, platformProps = {}) {
       }
 
       function onOk() {
+        console.log(props.picker)
         emit('ok', picker && picker.getValue())
         fireVisibleChange(false)
       }

@@ -5,7 +5,7 @@ export type CascaderOneValue = string | number
 export type CascaderValue = CascaderOneValue[]
 
 export interface ICascaderDataItem {
-  label: VNode
+  label: JSX.Element
   value: CascaderOneValue
   children?: ICascaderDataItem[]
 }

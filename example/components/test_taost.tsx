@@ -32,14 +32,8 @@ function click(key: number) {
 }
 
 export default defineComponent({
-  props: {
-    // onClick: Function,
-  },
   setup(_, { slots, attrs, emit }) {
-    const v = getCurrentInstance()
-    console.log(v);
-    console.log({ ..._ })
-    console.log({ ...attrs })
+
     return () =>
       h(WingBlank, () =>
         [1, 2, 3, 4, 5, 6].map((n) => (
@@ -47,8 +41,7 @@ export default defineComponent({
             <WhiteSpace />
             <Button
               onClick={() => {
-                // click(n)
-                emit('click')
+                click(n)
               }}
             >
               <Icon type="check" />

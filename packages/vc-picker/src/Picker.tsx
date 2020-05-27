@@ -15,13 +15,8 @@ import {
   getCurrentInstance,
 } from 'vue'
 
-export interface IPickerProp {
-  select: (...arg: any) => void
-  doScrollingComplete: (...arg: any) => void
-  computeChildIndex: (...arg: any) => number
-}
-
-const Picker = defineComponent<IPickerProp & IPickerProps>({
+const Picker = defineComponent< IPickerProps>({
+  name: 'VCPicker',
   props: pickerProps,
   setup(props, { slots, emit }) {
     let selectedValueState
@@ -37,6 +32,8 @@ const Picker = defineComponent<IPickerProp & IPickerProps>({
       const children = slots.default?.()[0]
       selectedValueState = children?.props?.value
     }
+    /**  mixin */
+    const { doScrollingComplete, select, computeChildIndex } = PickerMixin()
     /**  ~~~~~~~~~~~~~state~~~~~~~~~~~~~~~~ */
     const state = reactive({
       selectedValue: selectedValueState,
@@ -192,7 +189,7 @@ const Picker = defineComponent<IPickerProp & IPickerProps>({
           state.selectedValue = val
         }
         nextTick(() => {
-          props.select?.(
+          select(
             val,
             itemHeight,
             props.noAnimate ? scrollToWithoutAnimation : scrollTo
@@ -203,7 +200,7 @@ const Picker = defineComponent<IPickerProp & IPickerProps>({
     )
 
     onUpdated(() => {
-      props.select?.(state.selectedValue, itemHeight, scrollToWithoutAnimation)
+      select(state.selectedValue, itemHeight, scrollToWithoutAnimation)
     })
 
     onMounted(() => {
@@ -222,7 +219,7 @@ const Picker = defineComponent<IPickerProp & IPickerProps>({
       indicatorRef.value!.style.top = `${itemHeight * num}px`
       maskRef.value!.style.backgroundSize = `100% ${itemHeight * num}px`
       scrollHandersObj.setDisabled(props.disabled)
-      props.select?.(state.selectedValue, itemHeight, scrollTo)
+      select(state.selectedValue, itemHeight, scrollTo)
 
       const passed = passiveSupported()
       const willPreventDefault = passed ? { passive: false } : false
@@ -277,7 +274,7 @@ const Picker = defineComponent<IPickerProp & IPickerProps>({
       const top = scrollHanders.value.getValue()
       if (top >= 0) {
         const children = slots.default?.()!
-        const index = props.computeChildIndex(top, itemHeight, children.length)
+        const index = computeChildIndex(top, itemHeight, children.length)
         if (scrollValue !== index) {
           scrollValue = index
           const child = children[index]
@@ -293,7 +290,7 @@ const Picker = defineComponent<IPickerProp & IPickerProps>({
     function scrollingComplete() {
       const top = scrollHanders.value.getValue()
       if (top >= 0) {
-        props.doScrollingComplete(top, itemHeight, fireValueChange)
+        doScrollingComplete(top, itemHeight, fireValueChange)
       }
     }
 
@@ -362,4 +359,4 @@ const Picker = defineComponent<IPickerProp & IPickerProps>({
 })
 export const PickerItem = (_props: IItemProps) => null
 
-export default PickerMixin(Picker)
+export default Picker
